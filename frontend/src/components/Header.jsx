@@ -23,7 +23,7 @@ const HeaderStyle = () => {
         <HStack spacing={4}>
         
           <Button variant="ghost" color={'black'}>Need Help?</Button>
-          <Button variant="ghost" color={'black'}>About This</Button>
+          <Button variant="ghost" color={'black'}>About</Button>
           <Button variant="ghost" color={'black'}>Hello ...</Button>
         </HStack>
       </Flex>

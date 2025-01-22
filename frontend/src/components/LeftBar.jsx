@@ -1,15 +1,15 @@
-import { Flex, VStack, Button, IconButton } from "@chakra-ui/react";
+import { Flex, VStack, Button } from "@chakra-ui/react";
 
-import { MdDashboard, MdPayment, MdSettings, MdHelp } from "react-icons/md";
+import { MdDashboard, MdPayment, MdSettings, MdHelp, MdMoney } from "react-icons/md";
 
-const IconButtonStyle = {
+const ButtonStyle = {
     variant: 'ghost',
     color: 'black',
     justifyContent: 'flex-start'
 }
 
 
-const LeftBar = () => {
+const LeftBar = ({ setCurrentView, currentView }) => {
     return (
         <Flex
         w="300px" 
@@ -20,23 +20,36 @@ const LeftBar = () => {
         shadow="sm"
         >
         {/* Navigation Items */}
-            <VStack align="stretch" spacing={4}>
-                <IconButton {...IconButtonStyle}>
-                    <MdDashboard />
+            <VStack align="stretch" spacing={6}>
+
+                <Button leftIcon={<MdDashboard />} 
+                {...ButtonStyle}
+                onClick={() => setCurrentView('dashboard')}
+                >
                     Dashboard
-                </IconButton>
-                <IconButton {...IconButtonStyle}>
-                    <MdPayment />
+                </Button>
+
+                <Button 
+                leftIcon={<MdMoney />} 
+                {...ButtonStyle}
+                onClick={() => setCurrentView('expense')}
+                >
+                    Add Expense
+                </Button>
+
+                <Button leftIcon={<MdPayment />} 
+                {...ButtonStyle}>
                     Bills & Payments
-                </IconButton>
-                <IconButton {...IconButtonStyle}>
-                    <MdSettings />
+                </Button>
+
+                <Button leftIcon={<MdSettings />} {...ButtonStyle}>
                     Settings
-                </IconButton>
-                <IconButton {...IconButtonStyle}>
-                    <MdHelp />
+                </Button>
+
+                <Button leftIcon={<MdHelp />} {...ButtonStyle}>
                     Get Help
-                </IconButton>
+                </Button>
+
             </VStack>
         </Flex>
     )

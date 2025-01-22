@@ -6,7 +6,7 @@ const DataDash = () => {
     <Flex flex={1} direction="column" >
       {/* Stats Row */}
       <Flex gap={4} mb={6}>
-         {['$10.00', '$20.00', '$30.00'].map((value, i) => (
+         {['$10.00', '$20.00', '$30.00', ].map((value, i) => (
           <Box 
           h={'125px'}
           key={i} 

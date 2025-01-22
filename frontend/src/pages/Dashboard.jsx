@@ -1,12 +1,15 @@
 import { Box, HStack, Flex, Text, Icon, Button, Input } from "@chakra-ui/react";
-
+import { useState } from "react"; // Add this import
 
 import LeftBar from "../components/LeftBar";
 import DataDash from "../components/DataDash";
 import HeaderStyle from "../components/Header";
 import RightBar from "../components/RightBar";
+import ExpenseManager from "../components/ExpenseManager";
 
 const Dashboard = () => {
+  const [currentView, setCurrentView] = useState('dashboard');
+
   return (
     <Flex w="100%" h="100vh">
     
@@ -19,13 +22,14 @@ const Dashboard = () => {
         {/* Dashboard Content */}
         <Flex gap={6}>
           {/* Left Sidebar */}
-          <LeftBar/>
+          <LeftBar setCurrentView={setCurrentView} currentView={currentView}/>
 
           {/* Main Content Area */}
-          <DataDash/>
+          {currentView === 'dashboard' ? <DataDash/> : <ExpenseManager/>}
 
           {/* Right Sidebar */}
           <RightBar/>
+
         </Flex>
       </Flex>
     </Flex>
