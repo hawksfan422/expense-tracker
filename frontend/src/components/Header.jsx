@@ -1,6 +1,6 @@
 import { Flex, Box, Text, HStack, Button, Icon} from "@chakra-ui/react";
 
-import { MdDashboard} from "react-icons/md";
+import { PiCatBold } from "react-icons/pi";
 
 
 const HeaderStyle = () => {
@@ -16,7 +16,7 @@ const HeaderStyle = () => {
         {/* Logo */}
         <Flex align="center">
           <Box bg="blue.400" p={2} borderRadius="md" mr={2}>
-            <Icon as={MdDashboard} color="white" boxSize={5} />
+            <Icon as={PiCatBold } color="white" boxSize={5} />
           </Box>
           <Text fontSize="xl" fontWeight="bold">Expense Tracker</Text>
         </Flex>
