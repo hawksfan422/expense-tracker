@@ -6,8 +6,6 @@ import {
     Flex,
     Button,
     useToast,
-    useColorMode,
-    useColorModeValue
   } from "@chakra-ui/react";
   
   const Settings = () => {
