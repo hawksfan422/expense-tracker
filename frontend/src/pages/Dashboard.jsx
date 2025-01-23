@@ -5,10 +5,27 @@ import LeftBar from "../components/LeftBar";
 import DataDash from "../components/DataDash";
 import HeaderStyle from "../components/Header";
 import RightBar from "../components/RightBar";
-import ExpenseManager from "../components/ExpenseManager";
+import DeleteExpense from "../components/DeleteExpense.jsx";
+import AddExpense from "../components/AddExpense.jsx";
+import Settings from "../components/Settings.jsx";
 
 const Dashboard = () => {
   const [currentView, setCurrentView] = useState('dashboard');
+
+  const renderView = () => {
+    switch(currentView){
+      case 'dashboard':
+        return <DataDash/>;
+      case 'add':
+        return <AddExpense/>;
+      case 'delete':
+        return <DeleteExpense/>;
+      case 'settings':
+        return <Settings/>;
+      default:
+        return <DataDash/>;
+    }
+  }
 
   return (
     <Flex w="100%" h="100vh">
@@ -25,7 +42,7 @@ const Dashboard = () => {
           <LeftBar setCurrentView={setCurrentView} currentView={currentView}/>
 
           {/* Main Content Area */}
-          {currentView === 'dashboard' ? <DataDash/> : <ExpenseManager/>}
+          {renderView()}
 
           {/* Right Sidebar */}
           <RightBar/>

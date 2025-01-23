@@ -2,14 +2,14 @@ import Expense from '../models/expense.js';
 
 // Get all expenses
 export const getExpenses = async (req, res) => {
-    try {
-        const expenses = await Expense.find({date: -1});
-        res.json(expenses);
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ success: false, message: error.message });
-    }
-}
+  try {
+    const expenses = await Expense.find({}).sort({ createdAt: -1 });
+    res.json(expenses);
+  } catch (error) {
+    console.error('Error in getExpenses:', error);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // Add a new expense
 export const addExpense = async (req, res) => {

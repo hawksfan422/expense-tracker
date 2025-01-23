@@ -1,6 +1,6 @@
-import { Flex, VStack, Button } from "@chakra-ui/react";
+import { Flex, VStack, Button, useColorModeValue } from "@chakra-ui/react";
 
-import { MdDashboard, MdPayment, MdSettings, MdHelp, MdMoney } from "react-icons/md";
+import { MdDashboard, MdDelete , MdSettings, MdHelp, MdMoney } from "react-icons/md";
 
 const ButtonStyle = {
     variant: 'ghost',
@@ -12,9 +12,10 @@ const ButtonStyle = {
 const LeftBar = ({ setCurrentView, currentView }) => {
     return (
         <Flex
-        w="300px" 
+        w="300px"
+        minH={'75vh'} 
         direction="column" 
-        bg="white" 
+        bg={useColorModeValue('white', 'black' )}
         p={6} 
         borderRadius="lg"
         shadow="sm"
@@ -32,17 +33,23 @@ const LeftBar = ({ setCurrentView, currentView }) => {
                 <Button 
                 leftIcon={<MdMoney />} 
                 {...ButtonStyle}
-                onClick={() => setCurrentView('expense')}
+                onClick={() => setCurrentView('add')}
                 >
-                    Add Expense
+                    Add Transaction
                 </Button>
 
-                <Button leftIcon={<MdPayment />} 
-                {...ButtonStyle}>
-                    Bills & Payments
+                <Button leftIcon={<MdDelete />} 
+                {...ButtonStyle}
+                onClick={() => setCurrentView('delete')}
+                >
+                    Delete Transaction
                 </Button>
 
-                <Button leftIcon={<MdSettings />} {...ButtonStyle}>
+                <Button 
+                leftIcon={<MdSettings />} 
+                {...ButtonStyle}
+                onClick={() => setCurrentView('settings')}
+                >
                     Settings
                 </Button>
 
