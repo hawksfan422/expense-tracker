@@ -1,3 +1,5 @@
+import { useExpenses } from "../context/ExpenseContext";
+
 import { 
     Flex, 
     VStack, 
@@ -13,6 +15,7 @@ import { useEffect, useState } from "react";
 
 const RightBar = () => {
     const [recentTransactions, setRecentTransactions] = useState([]);
+    const { shouldRefresh } = useExpenses();
 
     const getRecentTransactions = async () => {
         try {
@@ -30,7 +33,7 @@ const RightBar = () => {
 
     useEffect(() => {
         getRecentTransactions();
-    }, []);
+    }, [shouldRefresh]);
 
     // Function to format date
     const formatDate = (dateString) => {

@@ -6,6 +6,7 @@ import {
     Flex,
     Button,
     useToast,
+    useColorMode
   } from "@chakra-ui/react";
   
   const Settings = () => {
@@ -20,6 +21,8 @@ import {
       });
     };
 
+    const { colorMode, toggleColorMode } = useColorMode();
+
     return (
       <Flex flex={1} direction="column">
         <Box bg="white" p={6} borderRadius="lg" shadow="sm">
@@ -29,10 +32,10 @@ import {
             {/* Theme Setting */}
             <Flex justify="space-between" align="center">
               <Box>
-                <Text fontWeight="medium">Dark Mode</Text>
+                <Text fontWeight="medium">Dark Mode (In Development)</Text>
                 <Text fontSize="sm" color="gray.500">Toggle dark/light theme</Text>
               </Box>
-              <Switch onChange={handleThemeChange}/>
+              <Button onClick={toggleColorMode}/>
             </Flex>
 
           </VStack>

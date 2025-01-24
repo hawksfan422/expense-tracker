@@ -1,77 +1,30 @@
-import { Flex, Box, Text, HStack } from "@chakra-ui/react";
+import { Flex, Box, Text, IconButton } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend,
-  ResponsiveContainer 
-} from 'recharts';
+import { useExpenses } from "../context/ExpenseContext";
 
-import { MdCircle, MdMoney  } from "react-icons/md";
+import { MdCircle, MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 
 // icons for categories
 import { CiShoppingTag, CiPizza } from "react-icons/ci";
 import { PiGasPumpLight } from "react-icons/pi";
+import { MdMoney } from "react-icons/md";
 
+// Data
+import LineChartComponent from './ui/LineChart';
+import PieChartComponent from './ui/PieChart';
 
-import { fetchExpenses } from "../services/expense";
+import { fetchExpenses } from '../services/expense';
 
 const DataDash = () => {
-
   const [topCategories, setTopCategories] = useState([]);
-  const [chartData, setChartData] = useState([]);
+  const [lineChartData, setLineChartData] = useState([]);
+  const [currentChart, setCurrentChart] = useState('line'); // Add this state
+  const [pieChartData, setPieChartData] = useState([]);
+  const { shouldRefresh } = useExpenses();
 
-  const processExpenses = async () => {
-    try {
-      const expenses = await fetchExpenses();
-      
-      // Process categories for top boxes
-      const categoryTotals = expenses.reduce((acc, expense) => {
-        const { category, amount } = expense;
-        if (!acc[category]) {
-          acc[category] = {
-            total: 0,
-            count: 0
-          };
-        }
-        acc[category].total += Number(amount);
-        acc[category].count += 1;
-        return acc;
-      }, {});
-
-      // Convert to array and sort by total amount
-      const sortedCategories = Object.entries(categoryTotals)
-        .map(([category, data]) => ({
-          category,
-          total: data.total,
-          count: data.count
-        }))
-        .sort((a, b) => b.total - a.total)
-        .slice(0, 3); // Get top 3
-
-      setTopCategories(sortedCategories);
-
-      // Process data for chart
-      const chartData = Object.entries(categoryTotals).map(([category, data]) => ({
-        category,
-        amount: Number(data.total.toFixed(2)),
-        transactions: data.count
-      }));
-
-      setChartData(chartData);
-
-    } catch (error) {
-      console.error('Error processing expenses:', error);
-    }
+  const toggleChart = () => {
+    setCurrentChart(currentChart === 'line' ? 'pie' : 'line');
   };
-
-  useEffect(() => {
-    processExpenses();
-  }, []);
 
   // Custom colors for categories
   const getCategoryColor = (category) => {
@@ -86,16 +39,84 @@ const DataDash = () => {
     return colors[category] || '#718096';
   };
 
-// Custom icons for categories
+  // Custom icons for categories
   const getCategoryIcon = (category) => {
     const icons = {
       Food: <CiPizza />,
-      Shopping: <CiShoppingTag  />,
+      Shopping: <CiShoppingTag />,
       Gas: <PiGasPumpLight />,
-
     };
     return icons[category] || <MdMoney />;
   };
+
+  const processExpenses = async () => {
+    try {
+      const expenses = await fetchExpenses();
+      
+      // Process categories for top boxes and charts
+      const categoryTotals = expenses.reduce((acc, expense) => {
+        const { category, amount } = expense;
+        if (!acc[category]) {
+          acc[category] = {
+            total: 0,
+            count: 0,
+            transactions: []
+          };
+        }
+        acc[category].total += Number(amount);
+        acc[category].count += 1;
+        acc[category].transactions.push({
+          amount: Number(amount),
+          date: new Date(expense.createdAt)
+        });
+        return acc;
+      }, {});
+
+      // Get top 3 categories
+      const sortedCategories = Object.entries(categoryTotals)
+        .map(([category, data]) => ({
+          category,
+          total: data.total,
+          count: data.count
+        }))
+        .sort((a, b) => b.total - a.total)
+        .slice(0, 3);
+
+      setTopCategories(sortedCategories);
+
+      // Process data for pie chart
+      const pieData = Object.entries(categoryTotals).map(([category, data]) => ({
+        name: category,
+        value: Number(data.total.toFixed(2))
+      }));
+      setPieChartData(pieData);
+
+      // Process data for line chart
+      const allDates = [...new Set(expenses.map(exp => 
+        new Date(exp.createdAt).toLocaleDateString()
+      ))].sort((a, b) => new Date(a) - new Date(b));
+
+      const lineData = allDates.map(date => {
+        const dataPoint = { date };
+        sortedCategories.forEach(({ category }) => {
+          const categoryData = categoryTotals[category].transactions
+            .filter(t => t.date.toLocaleDateString() === date)
+            .reduce((sum, t) => sum + t.amount, 0);
+          dataPoint[category] = categoryData;
+        });
+        return dataPoint;
+      });
+
+      setLineChartData(lineData);
+
+    } catch (error) {
+      console.error('Error processing expenses:', error);
+    }
+  };
+
+  useEffect(() => {
+    processExpenses();
+  }, [shouldRefresh]);
 
   return (
     <Flex flex={1} direction="column">
@@ -115,79 +136,81 @@ const DataDash = () => {
             overflow={'hidden'}
           >
             <Box>
-            <Text fontSize="sm" color="gray.500" display="flex" alignItems="center" gap={2}>
-            <MdCircle color={`${getCategoryColor(cat.category)}`} />
-            {cat.category}
-            </Text>
-            <Text fontSize="2xl" fontWeight="bold">
-              ${cat.total.toFixed(2)}
-            </Text>
-            <Text fontSize="sm" color="gray.500">
-              {cat.count} transaction{cat.count !== 1 ? 's' : ''}
-            </Text>
+              <Text fontSize="sm" color="gray.500" display="flex" alignItems="center" gap={2}>
+                <MdCircle color={`${getCategoryColor(cat.category)}`} />
+                {cat.category}
+              </Text>
+              <Text fontSize="2xl" fontWeight="bold">
+                ${cat.total.toFixed(2)}
+              </Text>
+              <Text fontSize="sm" color="gray.500">
+                {cat.count} transaction{cat.count !== 1 ? 's' : ''}
+              </Text>
             </Box>
             <Box 
-            ml={'100'} 
-            w={'100px'} 
-            h={'100px'} 
-            fontSize={'125px'} 
-            display={'flex'} 
-            justifyContent={'center'} 
-            alignItems={'center'}
+              ml={'100'} 
+              w={'100px'} 
+              h={'100px'} 
+              fontSize={'125px'} 
+              display={'flex'} 
+              justifyContent={'center'} 
+              alignItems={'center'}
             >
-            <Box 
-            marginTop={9}
-            marginLeft={14}
-            color={`${getCategoryColor(cat.category)}`}
-            >
-              {getCategoryIcon(cat.category)}
+              <Box 
+                marginTop={9}
+                marginLeft={14}
+                color={`${getCategoryColor(cat.category)}`}
+              >
+                {getCategoryIcon(cat.category)}
               </Box>
             </Box>
           </Box>
         ))}
       </Flex>
-
-      {/* Chart Area */}
+       {/* Combined Chart Box */}
       <Box 
-        h="400px" 
         bg="white" 
         borderRadius="lg" 
-        shadow="sm" 
-        p={6}
-        minHeight={'50vh'}
+        shadow="sm"
       >
-        <Text fontSize="lg" fontWeight="bold" mb={4}>
-          Expense Distribution
-        </Text>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={chartData}
-            margin={{
-              top: 20,
-              right: 30,
-              left: 20,
-              bottom: 20,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="category" />
-            <YAxis />
-            <Tooltip 
-              formatter={(value) => [`$${value}`, 'Amount']}
-              contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid #E2E8F0'
-              }}
+        {/* Chart Header */}
+        <Flex 
+          justify="space-between" 
+          align="center" 
+          p={4} 
+        >
+          <Text fontSize="lg" fontWeight="bold">
+            {currentChart === 'line' ? 'Expense Trends' : 'Expense Distribution'}
+          </Text>
+          <IconButton
+            icon={currentChart === 'line' ? <MdKeyboardArrowRight /> : <MdKeyboardArrowLeft />}
+            onClick={toggleChart}
+            aria-label="Toggle chart"
+            variant="ghost"
+            size="lg"
+            _hover={{ bg: 'gray.100' }}
+          />
+        </Flex>
+
+        {/* Chart Content */}
+        <Box
+          position="relative"
+          transition="opacity 0.3s ease-in-out"
+          p={6}
+        >
+          {currentChart === 'line' ? (
+            <LineChartComponent 
+              data={lineChartData}
+              categories={topCategories}
+              colors={getCategoryColor}
             />
-            <Legend />
-            <Bar 
-              dataKey="amount" 
-              name="Amount ($)" 
-              fill="#4299E1"
-              radius={[4, 4, 0, 0]}
+          ) : (
+            <PieChartComponent 
+              data={pieChartData}
+              colors={getCategoryColor}
             />
-          </BarChart>
-        </ResponsiveContainer>
+          )}
+        </Box>
       </Box>
     </Flex>
   );

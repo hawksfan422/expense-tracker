@@ -1,3 +1,5 @@
+import { useExpenses } from "../context/ExpenseContext";
+
 import { 
   Box, 
   Button, 
@@ -23,6 +25,8 @@ const AddExpense = () => {
     description: ""
   });
   const toast = useToast();
+
+  const { refreshExpenses } = useExpenses();
 
   // Fetch expenses handler
   const handleFetchExpenses = async () => {
@@ -50,7 +54,7 @@ const AddExpense = () => {
         duration: 2000,
       });
       setFormData({ name: "", category: "", amount: "", description: "" });
-      handleFetchExpenses(); // Refresh the list
+      refreshExpenses(); // Refresh the list
     } catch (error) {
       toast({
         title: "Error adding expense",

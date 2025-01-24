@@ -1,3 +1,5 @@
+import { useExpenses } from "../context/ExpenseContext";
+
 import { 
     Box, 
     Button,  
@@ -16,6 +18,8 @@ import {
   const DeleteExpense = () => {
     const [expenses, setExpenses] = useState([]);
     const toast = useToast();
+
+    const { refreshExpenses } = useExpenses();
   
     // Fetch expenses handler
     const handleFetchExpenses = async () => {
@@ -41,6 +45,7 @@ import {
           status: "success",
           duration: 2000,
         });
+        refreshExpenses();
         handleFetchExpenses();
       } catch (error) {
         toast({
@@ -53,7 +58,7 @@ import {
   
     useEffect(() => {
       handleFetchExpenses();
-    }, []);
+    }, [refreshExpenses]);
   
     return (
       <Flex flex={1} direction="column">
