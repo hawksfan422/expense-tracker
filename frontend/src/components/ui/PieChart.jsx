@@ -13,7 +13,6 @@ const PieChartComponent = ({ data, colors }) => {
       h="400px" 
       bg="white" 
       borderRadius="lg" 
-      p={6}
     >
       <ResponsiveContainer width="100%" height="100%">
         <RechartsePieChart>
