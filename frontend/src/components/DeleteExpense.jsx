@@ -19,7 +19,8 @@ import {
     const [expenses, setExpenses] = useState([]);
     const toast = useToast();
 
-    const { refreshExpenses } = useExpenses();
+    const expenseContext = useExpenses();
+    const refreshExpenses = expenseContext?.refreshExpenses;
   
     // Fetch expenses handler
     const handleFetchExpenses = async () => {

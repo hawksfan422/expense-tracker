@@ -26,7 +26,8 @@ const AddExpense = () => {
   });
   const toast = useToast();
 
-  const { refreshExpenses } = useExpenses();
+  const expensesContext = useExpenses();
+  const refreshExpenses = expensesContext?.refreshExpenses || (() => {}); 
 
   // Fetch expenses handler
   const handleFetchExpenses = async () => {

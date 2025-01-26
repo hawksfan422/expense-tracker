@@ -4,7 +4,13 @@ const API_URL = '/api/expenses';
 export const fetchExpenses = async () => {
   try {
     console.log('Fetching expenses...');
-    const response = await fetch(API_URL);
+    const token = localStorage.getItem('token'); // Get auth token
+    const response = await fetch(API_URL, {
+      headers: {
+        'Authorization': `Bearer ${token}`, // Add auth header
+        'Content-Type': 'application/json',
+      },
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -16,14 +22,15 @@ export const fetchExpenses = async () => {
     throw error;
   }
 };
-
 // Add new expense
 export const submitExpense = async (formData) => {
   try {
     console.log('Submitting expense:', formData);
+    const token = localStorage.getItem('token'); // Get auth token
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${token}`, // Add auth header
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
@@ -45,8 +52,12 @@ export const submitExpense = async (formData) => {
 // Delete expense
 export const deleteExpense = async (id) => {
   try {
+    const token = localStorage.getItem('token'); // Get auth token
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Add auth header
+      },
     });
     
     if (!response.ok) {

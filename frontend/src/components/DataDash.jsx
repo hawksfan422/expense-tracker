@@ -13,6 +13,7 @@ import { MdMoney } from "react-icons/md";
 import LineChartComponent from './ui/LineChart';
 import PieChartComponent from './ui/PieChart';
 
+
 import { fetchExpenses } from '../services/expense';
 
 const DataDash = () => {
@@ -20,7 +21,8 @@ const DataDash = () => {
   const [lineChartData, setLineChartData] = useState([]);
   const [currentChart, setCurrentChart] = useState('line'); // Add this state
   const [pieChartData, setPieChartData] = useState([]);
-  const { shouldRefresh } = useExpenses();
+  const expenseContext = useExpenses();
+  const shouldRefresh = expenseContext?.shouldRefresh;
 
   const toggleChart = () => {
     setCurrentChart(currentChart === 'line' ? 'pie' : 'line');

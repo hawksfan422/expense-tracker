@@ -15,7 +15,8 @@ import { useEffect, useState } from "react";
 
 const RightBar = () => {
     const [recentTransactions, setRecentTransactions] = useState([]);
-    const { shouldRefresh } = useExpenses();
+    const expenseContext = useExpenses();
+    const shouldRefresh = expenseContext?.shouldRefresh || (() => {});
 
     const getRecentTransactions = async () => {
         try {
