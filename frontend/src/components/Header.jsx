@@ -1,10 +1,16 @@
-import { Flex, Box, Text, HStack, Button, Icon, useColorModeValue} from "@chakra-ui/react";
+import { Flex, Box, Text, HStack, Button, Icon, useColorModeValue, Menu, MenuList, MenuItem, MenuButton} from "@chakra-ui/react";
 
 import { GiBlackBar } from "react-icons/gi";
 
+import { useNavigate } from 'react-router-dom';
+
 
 const HeaderStyle = () => {
-
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
 
     return(
         <Flex 
@@ -26,7 +32,16 @@ const HeaderStyle = () => {
         <HStack spacing={4}>
           <Button variant="ghost" color={useColorModeValue('black', 'white')}>Need Help?</Button>
           <Button variant="ghost" color={useColorModeValue('black', 'white')}>About</Button>
-          <Button variant="ghost" color={useColorModeValue('black', 'white')}>Hello ...</Button>
+          <Menu>
+            <MenuButton as={Button} variant="ghost" color={useColorModeValue('black', 'white')}>
+              Hello...
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={handleLogout}>
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </HStack>
       </Flex>
 

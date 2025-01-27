@@ -20,7 +20,7 @@ import {
     const toast = useToast();
 
     const expenseContext = useExpenses();
-    const refreshExpenses = expenseContext?.refreshExpenses;
+    const refreshExpenses = expenseContext?.refreshExpenses || (() => {}); 
   
     // Fetch expenses handler
     const handleFetchExpenses = async () => {

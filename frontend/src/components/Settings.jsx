@@ -2,25 +2,12 @@ import {
     Box,
     VStack,
     Text,
-    Switch,
     Flex,
     Button,
-    useToast,
     useColorMode
   } from "@chakra-ui/react";
-  
+    d
   const Settings = () => {
-    const toast = useToast();
-  
-    // Example settings
-    const handleThemeChange = () => {
-      toast({
-        title: "Theme changed",
-        status: "success",
-        duration: 2000,
-      });
-    };
-
     const { colorMode, toggleColorMode } = useColorMode();
 
     return (

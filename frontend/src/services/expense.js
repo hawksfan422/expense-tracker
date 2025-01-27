@@ -3,11 +3,10 @@ const API_URL = '/api/expenses';
 // Fetch all expenses
 export const fetchExpenses = async () => {
   try {
-    console.log('Fetching expenses...');
     const token = localStorage.getItem('token'); // Get auth token
     const response = await fetch(API_URL, {
       headers: {
-        'Authorization': `Bearer ${token}`, // Add auth header
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     });
@@ -15,7 +14,6 @@ export const fetchExpenses = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log('Fetched expenses:', data);
     return data;
   } catch (error) {
     console.error('Error fetching expenses:', error);
@@ -25,7 +23,6 @@ export const fetchExpenses = async () => {
 // Add new expense
 export const submitExpense = async (formData) => {
   try {
-    console.log('Submitting expense:', formData);
     const token = localStorage.getItem('token'); // Get auth token
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -41,7 +38,6 @@ export const submitExpense = async (formData) => {
     }
 
     const data = await response.json();
-    console.log('Response:', data);
     return data;
   } catch (error) {
     console.error('Error adding expense:', error);

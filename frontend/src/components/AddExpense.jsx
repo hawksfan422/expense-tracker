@@ -74,7 +74,7 @@ const AddExpense = () => {
     <Flex flex={1} direction="column">
       <VStack spacing={6} align="stretch">
         {/* Add Expense Form */}
-        <Box bg="white" p={6} borderRadius="lg" shadow="sm">
+        <Box bg="white" p={6} borderRadius="lg" shadow="sm" w={'1100px'}>
           <form onSubmit={handleSubmit}>
             <VStack spacing={4}>
               <Box w="100%">

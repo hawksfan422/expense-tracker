@@ -18,13 +18,13 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const toast = useToast();
-    const { login: authLogin } = useAuth(); // Add this line
-  
+    const { login: authLogin } = useAuth(); 
+    
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
         const userData = await login(email, password);
-        authLogin(userData, userData.token); // Add this line
+        authLogin(userData, userData.token);
         toast({
           title: 'Login successful',
           status: 'success',
