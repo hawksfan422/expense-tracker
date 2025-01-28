@@ -2,17 +2,18 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
-  email: {
+  username: {
     type: String,
-    required: true,
+    required: [true, 'Username is required'],
     unique: true,
     trim: true,
-    lowercase: true
+    lowercase: true,
+    minlength: 3
   },
   password: {
     type: String,
     required: true,
-    minlength: 6
+    minlength: 3
   }
 }, {
   timestamps: true

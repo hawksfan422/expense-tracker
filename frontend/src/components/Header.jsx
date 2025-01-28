@@ -7,6 +7,12 @@ import { useNavigate } from 'react-router-dom';
 
 const HeaderStyle = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+
+
+  const fetchUsername = async () => {}
+
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');

@@ -14,17 +14,17 @@ import {
 import { register } from '../../services/auth.service';
 
 const Register = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const toast = useToast();
-    const { login: authLogin } = useAuth(); // Add this line
-  
+    const { login: authLogin } = useAuth(); 
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const userData = await register(email, password);
-        authLogin(userData, userData.token); // Add this line
+        const userData = await register(username, password);
+        authLogin(userData, userData.token); 
         toast({
           title: 'Registration successful',
           status: 'success',
@@ -47,11 +47,11 @@ const Register = () => {
         <Text fontSize="2xl" fontWeight="bold">Register</Text>
         
         <FormControl isRequired>
-          <FormLabel>Email</FormLabel>
+          <FormLabel>Username</FormLabel>
           <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </FormControl>
 

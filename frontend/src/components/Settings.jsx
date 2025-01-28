@@ -6,7 +6,6 @@ import {
     Button,
     useColorMode
   } from "@chakra-ui/react";
-    d
   const Settings = () => {
     const { colorMode, toggleColorMode } = useColorMode();
 

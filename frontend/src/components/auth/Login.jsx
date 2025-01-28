@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const toast = useToast();
@@ -23,7 +23,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const userData = await login(email, password);
+        const userData = await login(username, password);
         authLogin(userData, userData.token);
         toast({
           title: 'Login successful',
@@ -47,11 +47,11 @@ const Login = () => {
         <Text fontSize="2xl" fontWeight="bold">Login</Text>
         
         <FormControl isRequired>
-          <FormLabel>Email</FormLabel>
+          <FormLabel>Username</FormLabel>
           <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </FormControl>
 
