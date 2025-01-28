@@ -12,7 +12,7 @@ import {
   InputGroup
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import CustomSelect from './ui/Select';
+import CustomSelect from './ui/select';
 import { EXPENSE_CATEGORIES } from '../constants/ExpenseCategories'
 import { fetchExpenses, submitExpense } from "../services/expense";
 
