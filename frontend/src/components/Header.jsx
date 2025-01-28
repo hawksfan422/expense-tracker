@@ -7,11 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 const HeaderStyle = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-
-
-  const fetchUsername = async () => {}
-
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -40,7 +35,7 @@ const HeaderStyle = () => {
           <Button variant="ghost" color={useColorModeValue('black', 'white')}>About</Button>
           <Menu>
             <MenuButton as={Button} variant="ghost" color={useColorModeValue('black', 'white')}>
-              Hello...
+              Hello.
             </MenuButton>
             <MenuList>
               <MenuItem onClick={handleLogout}>
