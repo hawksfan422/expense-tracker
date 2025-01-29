@@ -1,10 +1,11 @@
 import Register from "../components/auth/Register";
+import { Flex } from "@chakra-ui/react";
 
 const RegisterPage = () => {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Register />
-      </div>
+      <Flex minH="100vh" alignItems="center">
+       <Register />
+      </Flex>
     );
   };
   

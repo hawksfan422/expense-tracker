@@ -43,7 +43,6 @@ const Login = () => {
     };
 
   return (
-    <Flex height="100vh" alignItems="center" justifyContent="center">
     <Box p={8} minWidth="500px" mx="auto">
       <VStack spacing={4} as="form" onSubmit={handleSubmit}>
         <Text fontSize="2xl" fontWeight="bold">Login</Text>
@@ -81,23 +80,21 @@ const Login = () => {
           </Button>
         </Text>
       </VStack>
+      <Box
+      bg={'white'}
+      color={'black'}
+      rounded={'md'}
+      shadow="md"
+      position={'absolute'}
+      p={10}
+      top={'40%'}
+      right={'15%'}
+      >
+        <Text>For Demo Purposes</Text>
+        <Text>Username: 123</Text>
+        <Text>Password: 123</Text>
+      </Box>
     </Box>
-    <Box 
-    position={'absolute'}  
-    right={'10%'} 
-    borderRadius="lg"
-    shadow="sm" 
-    p={8}
-    bg={'gray.100'}
-    justifyContent={'center'}
-    alignItems={'center'}
-    >
-      <Text>For Demo Purposes</Text>
-      <Text>Username: test</Text>
-      <Text>Password: 123</Text>
-
-    </Box>
-    </Flex>
   );
 };
 

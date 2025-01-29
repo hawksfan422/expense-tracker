@@ -1,10 +1,11 @@
 import Login from "../components/auth/Login";
+import { Flex } from "@chakra-ui/react";
 
 const LoginPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <Flex minH="100vh" alignItems="center">
       <Login />
-    </div>
+    </Flex>
   );
 };
 

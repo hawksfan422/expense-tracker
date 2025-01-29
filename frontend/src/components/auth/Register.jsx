@@ -42,7 +42,7 @@ const Register = () => {
     };
 
   return (
-    <Box p={8} maxWidth="500px" mx="auto">
+    <Box p={8} minWidth="500px" mx="auto">
       <VStack spacing={4} as="form" onSubmit={handleSubmit}>
         <Text fontSize="2xl" fontWeight="bold">Register</Text>
         
