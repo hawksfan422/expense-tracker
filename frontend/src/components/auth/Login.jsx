@@ -11,6 +11,7 @@ import {
   VStack,
   Text,
   useToast,
+  Flex,
 } from '@chakra-ui/react';
 
 const Login = () => {
@@ -42,7 +43,8 @@ const Login = () => {
     };
 
   return (
-    <Box p={8} maxWidth="500px" mx="auto">
+    <Flex height="100vh" alignItems="center" justifyContent="center">
+    <Box p={8} minWidth="500px" mx="auto">
       <VStack spacing={4} as="form" onSubmit={handleSubmit}>
         <Text fontSize="2xl" fontWeight="bold">Login</Text>
         
@@ -80,6 +82,22 @@ const Login = () => {
         </Text>
       </VStack>
     </Box>
+    <Box 
+    position={'absolute'}  
+    right={'10%'} 
+    borderRadius="lg"
+    shadow="sm" 
+    p={8}
+    bg={'gray.100'}
+    justifyContent={'center'}
+    alignItems={'center'}
+    >
+      <Text>For Demo Purposes</Text>
+      <Text>Username: test</Text>
+      <Text>Password: 123</Text>
+
+    </Box>
+    </Flex>
   );
 };
 
