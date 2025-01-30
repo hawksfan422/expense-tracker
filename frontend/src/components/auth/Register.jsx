@@ -10,8 +10,12 @@ import {
   VStack,
   Text,
   useToast,
+  InputGroup,
+  InputLeftElement
 } from '@chakra-ui/react';
 import { register } from '../../services/auth.service';
+
+import { FaRegUser, FaLock } from 'react-icons/fa';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -42,42 +46,37 @@ const Register = () => {
     };
 
   return (
-    <Box p={8} minWidth="500px" mx="auto">
-      <VStack spacing={4} as="form" onSubmit={handleSubmit}>
-        <Text fontSize="2xl" fontWeight="bold">Register</Text>
+    <Box p={8} minWidth="500px" mx="auto" height={'100vh'} display={'flex'} flexDirection={'column'}>
+      <VStack spacing={4} as="form" onSubmit={handleSubmit} flex={1} justify="center">
+        <Text fontSize="4xl" fontWeight="bold" color={'green.300'}>Register</Text>
         
         <FormControl isRequired>
-          <FormLabel>Username</FormLabel>
-          <Input
+        <InputGroup>
+          <InputLeftElement pointerEvents="none" children={<FaRegUser color='gray'/>} /><Input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            focusBorderColor="green.300"
+            placeholder='Username'
           />
+        </InputGroup>
         </FormControl>
-
         <FormControl isRequired>
-          <FormLabel>Password</FormLabel>
+        <InputGroup>
+          <InputLeftElement pointerEvents="none" children={<FaLock color='gray'/>} />
           <Input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            focusBorderColor="green.300"
+            placeholder='Password'
           />
+        </InputGroup>
         </FormControl>
 
-        <Button type="submit" colorScheme="blue" width="100%">
+        <Button type="submit" colorScheme="green" width="100%">
           Register
         </Button>
-
-        <Text>
-          Already have an account?{' '}
-          <Button
-            variant="link"
-            colorScheme="blue"
-            onClick={() => navigate('/login')}
-          >
-            Login
-          </Button>
-        </Text>
       </VStack>
     </Box>
   );

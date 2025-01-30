@@ -2,14 +2,15 @@ import { Flex, VStack, Button, useColorModeValue } from "@chakra-ui/react";
 
 import { MdDashboard, MdDelete , MdSettings, MdHelp, MdMoney } from "react-icons/md";
 
-const ButtonStyle = {
-    variant: 'ghost',
-    color: 'black',
-    justifyContent: 'flex-start'
-}
-
 
 const LeftBar = ({ setCurrentView, currentView }) => {
+    
+    const ButtonStyle = {
+        variant: 'ghost',
+        color: useColorModeValue('black', 'white'),
+        justifyContent: 'flex-start'
+    }
+
     return (
         <Flex
         w="300px"
@@ -23,7 +24,8 @@ const LeftBar = ({ setCurrentView, currentView }) => {
         {/* Navigation Items */}
             <VStack align="stretch" spacing={6}>
 
-                <Button leftIcon={<MdDashboard />} 
+                <Button 
+                leftIcon={<MdDashboard />} 
                 {...ButtonStyle}
                 onClick={() => setCurrentView('dashboard')}
                 >

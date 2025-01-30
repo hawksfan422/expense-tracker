@@ -12,7 +12,12 @@ import {
   Text,
   useToast,
   Flex,
+  Spacer,
+  InputGroup,
+  InputLeftElement
 } from '@chakra-ui/react';
+
+import { FaRegUser, FaLock } from 'react-icons/fa';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -43,57 +48,39 @@ const Login = () => {
     };
 
   return (
-    <Box p={8} minWidth="500px" mx="auto">
-      <VStack spacing={4} as="form" onSubmit={handleSubmit}>
-        <Text fontSize="2xl" fontWeight="bold">Login</Text>
-        
+    <Box p={8} minWidth="500px" mx="auto" position={'relative'} height={'100vh'} display={'flex'} flexDirection={'column'}>
+      <VStack spacing={4} as="form" onSubmit={handleSubmit} flex={1} justify="center">
+        <Text fontSize="4xl" fontWeight="bold" color={'green.300'}>Login</Text>
         <FormControl isRequired>
-          <FormLabel>Username</FormLabel>
+        <InputGroup>
+          <InputLeftElement pointerEvents="none" children={<FaRegUser color='gray'/>} />
           <Input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            focusBorderColor="green.300"
+            placeholder='Username'
           />
+        </InputGroup>
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel>Password</FormLabel>
+        <InputGroup>
+          <InputLeftElement pointerEvents="none" children={<FaLock color='gray'/>} />
           <Input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            focusBorderColor="green.300"
+            placeholder='Password'
           />
+        </InputGroup>
         </FormControl>
 
-        <Button type="submit" colorScheme="blue" width="100%">
+        <Button type="submit" colorScheme="green" width="100%">
           Login
         </Button>
-
-        <Text>
-          Don't have an account?{' '}
-          <Button
-            variant="link"
-            colorScheme="blue"
-            onClick={() => navigate('/register')}
-          >
-            Register
-          </Button>
-        </Text>
       </VStack>
-      <Box
-      bg={'white'}
-      color={'black'}
-      rounded={'md'}
-      shadow="md"
-      position={'absolute'}
-      p={10}
-      top={'40%'}
-      right={'15%'}
-      >
-        <Text>For Demo Purposes</Text>
-        <Text>Username: 123</Text>
-        <Text>Password: 123</Text>
-      </Box>
     </Box>
   );
 };

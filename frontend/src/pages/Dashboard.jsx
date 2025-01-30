@@ -1,4 +1,4 @@
-import { Box, HStack, Flex, Text, Icon, Button, Input } from "@chakra-ui/react";
+import { Box, HStack, Flex, Text, Icon, Button, Input,useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react"; // Add this import
 
 import LeftBar from "../components/LeftBar";
@@ -31,7 +31,7 @@ const Dashboard = () => {
     <Flex w="100%" h="100vh">
     
       {/* Main Content Area */}
-      <Flex flex={1} bg="gray.50" p={8} direction="column" color={'black'}>
+      <Flex flex={1} bg={useColorModeValue('gray.50', 'blackAlpha.500')} p={8} direction="column" color={'black'}>
 
         {/* Header */}
         <HeaderStyle/>

@@ -16,7 +16,7 @@ const HeaderStyle = () => {
     return(
         <Flex 
         w="100%" 
-        bg={useColorModeValue('white', 'black')}
+        bg={useColorModeValue('white', 'blackAlpha.600')}
         p={6} 
         borderRadius="lg"
         shadow="sm"
@@ -25,7 +25,7 @@ const HeaderStyle = () => {
         >
         {/* Logo */}
         <Flex align="center">
-          <Box bg="blue.400" p={2} borderRadius="md" mr={2}>
+          <Box bg="green.300" p={2} borderRadius="md" mr={2}>
             <Icon as={GiBlackBar } mt={1} fontSize={'20px'} color={useColorModeValue('white', 'black')}/>
           </Box>
           <Text fontSize="xl" fontWeight="bold" ml={2} color={useColorModeValue('black', 'white')}>Expense Tracker</Text>
@@ -35,7 +35,7 @@ const HeaderStyle = () => {
           <Button variant="ghost" color={useColorModeValue('black', 'white')}>About</Button>
           <Menu>
             <MenuButton as={Button} variant="ghost" color={useColorModeValue('black', 'white')}>
-              Hello.
+              Profile
             </MenuButton>
             <MenuList>
               <MenuItem onClick={handleLogout}>
