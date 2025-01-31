@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import { 
   LineChart as RechartsLineChart, 
   Line, 
@@ -7,14 +7,14 @@ import {
   CartesianGrid, 
   Tooltip, 
   Legend,
-  ResponsiveContainer 
+  ResponsiveContainer,
 } from 'recharts';
 
 const LineChartComponent = ({ data, categories, colors }) => {
   return (
     <Box 
       h="400px" 
-      bg="white" 
+      bg={useColorModeValue('white', 'blackAlpha.200' )} 
       borderRadius="lg" 
       p={6}
       mb={6}
@@ -29,7 +29,7 @@ const LineChartComponent = ({ data, categories, colors }) => {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="2 2" />
           <XAxis dataKey="date" />
           <YAxis />
           <Tooltip 

@@ -1,12 +1,12 @@
-import { Flex, Box, Text, IconButton } from "@chakra-ui/react";
+import { Flex, Box, Text, IconButton, useColorModeValue } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useExpenses } from "../context/ExpenseContext";
 
 import { MdCircle, MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 
 // icons for categories
-import { CiShoppingTag, CiPizza } from "react-icons/ci";
-import { PiGasPumpLight } from "react-icons/pi";
+import { CiShoppingTag, CiPizza, CiMoneyCheck1, CiHospital1  } from "react-icons/ci";
+import { PiGasPumpLight, PiPopcornThin, PiTrainLight  } from "react-icons/pi";
 import { MdMoney } from "react-icons/md";
 
 // Data
@@ -33,9 +33,11 @@ const DataDash = () => {
     const colors = {
       Food: '#feebc8',
       Gas: '#fed7d7',
-      Entertainment: '#9F7AEA',
-      Bills: '#F56565',
+      Entertainment: '#e9d8fd',
+      Bills: '#c6f6d5',
       Shopping: '#bee3f8',
+      Transportation: '#b2f5ea',
+      Healthcare: '#fed7e2',
       Other: '#718096'
     };
     return colors[category] || '#718096';
@@ -45,8 +47,12 @@ const DataDash = () => {
   const getCategoryIcon = (category) => {
     const icons = {
       Food: <CiPizza />,
-      Shopping: <CiShoppingTag />,
       Gas: <PiGasPumpLight />,
+      Entertainment: <PiPopcornThin />,
+      Bills: <CiMoneyCheck1 />,
+      Shopping: <CiShoppingTag />,
+      Transportation: <PiTrainLight />,
+      Healthcare: <CiHospital1 />,
     };
     return icons[category] || <MdMoney />;
   };
@@ -129,7 +135,8 @@ const DataDash = () => {
             key={index}
             h={'125px'}
             p={4}
-            bg="white"
+            bg={useColorModeValue('white', 'blackAlpha.600')}
+            color={useColorModeValue('black', 'white')}
             borderRadius="lg"
             flex={1}
             shadow="sm"
@@ -171,7 +178,8 @@ const DataDash = () => {
       </Flex>
        {/* Combined Chart Box */}
       <Box 
-        bg="white" 
+        bg={useColorModeValue('white', 'blackAlpha.600' )}
+        color={useColorModeValue('black', 'white')}
         borderRadius="lg" 
         shadow="sm"
       >

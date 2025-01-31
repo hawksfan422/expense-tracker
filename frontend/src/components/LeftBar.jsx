@@ -16,7 +16,7 @@ const LeftBar = ({ setCurrentView, currentView }) => {
         w="300px"
         minH={'75vh'} 
         direction="column" 
-        bg={useColorModeValue('white', 'black' )}
+        bg={useColorModeValue('white', 'blackAlpha.600' )}
         p={6} 
         borderRadius="lg"
         shadow="sm"
@@ -54,10 +54,14 @@ const LeftBar = ({ setCurrentView, currentView }) => {
                 >
                     Settings
                 </Button>
-
-                <Button leftIcon={<MdHelp />} {...ButtonStyle}>
+                {/* TODO: Add the following views for these buttons: */}
+                
+                {/* Edit Transaction */}
+                
+                 {/* Get Help */}
+                {/* <Button leftIcon={<MdHelp />} {...ButtonStyle}>
                     Get Help
-                </Button>
+                </Button> */}
 
             </VStack>
         </Flex>

@@ -11,9 +11,11 @@ import {
     Tbody,
     Td,
     Thead,
+    useColorModeValue
   } from "@chakra-ui/react";
   import { useState, useEffect } from "react";
   import { fetchExpenses, deleteExpense } from "../services/expense";
+import { use } from "react";
   
   const DeleteExpense = () => {
     const [expenses, setExpenses] = useState([]);
@@ -62,9 +64,9 @@ import {
     }, [refreshExpenses]);
   
     return (
-      <Flex flex={1} direction="column">
+      <Flex flex={1} direction="column" color={useColorModeValue('black', 'white')}>
           {/* Expenses Table */}
-          <Box bg="white" p={6} borderRadius="lg" shadow="sm" overflowX="auto" minH={0}>
+          <Box bg={useColorModeValue('white', 'blackAlpha.600' )} p={6} borderRadius="lg" shadow="sm" overflowX="auto" minH={0}>
             <Table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <Thead>
                 <Tr>

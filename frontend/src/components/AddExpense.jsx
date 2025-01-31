@@ -9,7 +9,8 @@ import {
   Text,
   Flex,
   InputLeftElement,
-  InputGroup
+  InputGroup,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import CustomSelect from './ui/select';
@@ -74,9 +75,9 @@ const AddExpense = () => {
     <Flex flex={1} direction="column">
       <VStack spacing={6} align="stretch">
         {/* Add Expense Form */}
-        <Box bg="white" p={6} borderRadius="lg" shadow="sm" w={'1100px'}>
+        <Box bg={useColorModeValue('white', 'blackAlpha.600' )} p={6} borderRadius="lg" shadow="sm">
           <form onSubmit={handleSubmit}>
-            <VStack spacing={4}>
+            <VStack spacing={4} color={useColorModeValue('black', 'white')}>
               <Box w="100%">
                 <Text mb={2}>Name</Text>
                 <Input 

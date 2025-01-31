@@ -28,10 +28,10 @@ const Dashboard = () => {
   }
 
   return (
-    <Flex w="100%" h="100vh">
+    <Flex w="100%" minH={'100vh'} h='auto'>
     
       {/* Main Content Area */}
-      <Flex flex={1} bg={useColorModeValue('gray.50', 'blackAlpha.500')} p={8} direction="column" color={'black'}>
+      <Flex flex={1} bg={useColorModeValue('gray.50', 'blackAlpha.600')} p={8} direction="column" color={'black'}>
 
         {/* Header */}
         <HeaderStyle/>

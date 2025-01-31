@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import { 
   PieChart as RechartsePieChart, 
   Pie, 
@@ -11,7 +11,8 @@ const PieChartComponent = ({ data, colors }) => {
   return (
     <Box 
       h="400px" 
-      bg="white" 
+      bg={useColorModeValue('white', 'blackAlpha.200' )}  
+      color={useColorModeValue('black', 'white')}
       borderRadius="lg" 
     >
       <ResponsiveContainer width="100%" height="100%">

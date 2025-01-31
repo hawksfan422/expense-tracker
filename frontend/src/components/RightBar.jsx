@@ -6,7 +6,8 @@ import {
     Text, 
     Box,
     Divider,
-    Badge
+    Badge,
+    useColorModeValue
 } from "@chakra-ui/react";
 
 
@@ -50,8 +51,11 @@ const RightBar = () => {
         const colors = {
             Food: 'orange',
             Gas: 'red',
+            Entertainment: 'purple',
             Bills: 'green',
             Shopping: 'blue',
+            Transportation: 'teal',
+            Healthcare: 'pink',
             Other: 'gray'
         };
         return colors[category] || 'gray';
@@ -61,7 +65,8 @@ const RightBar = () => {
         <Flex
             w="400px" 
             direction="column" 
-            bg="white" 
+            bg={useColorModeValue('white', 'blackAlpha.600' )}
+            color={useColorModeValue('black', 'white')}
             p={6} 
             borderRadius="lg"
             shadow="sm"
