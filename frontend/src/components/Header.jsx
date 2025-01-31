@@ -26,10 +26,10 @@ const HeaderStyle = () => {
         >
         {/* Logo */}
         <Flex align="center">
-          <Box bg="green.300" p={2} px={3} borderRadius="md" mr={2}>
+          <Box bg="green.200" p={2} px={3} borderRadius="md" mr={2}>
             <Icon as={GiBlackBar } mt={1} fontSize={'20px'} color='black'/>
           </Box>
-          <Text fontSize="xl" fontWeight="bold" ml={2} color={useColorModeValue('black', 'white')}>Expense Tracker</Text>
+          <Text fontSize="xl" fontWeight="bold" ml={2} color={useColorModeValue('black', 'white')}>Money Trail - Expense Tracker</Text>
         </Flex>
         <HStack spacing={4}>
         {/* TODO: Add the following pages for these buttons */}
