@@ -129,7 +129,7 @@ const DataDash = () => {
   return (
     <Flex flex={1} direction="column">
       {/* Top Categories Stats */}
-      <Flex gap={4} mb={6}>
+      <Flex  gap={4} mb={6}>
         {topCategories.map((cat, index) => (
           <Box
             key={index}
@@ -157,7 +157,6 @@ const DataDash = () => {
               </Text>
             </Box>
             <Box 
-              ml={'100'} 
               w={'100px'} 
               h={'100px'} 
               fontSize={'125px'} 

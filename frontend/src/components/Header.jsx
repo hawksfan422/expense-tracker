@@ -34,7 +34,7 @@ const HeaderStyle = () => {
         <HStack spacing={4}>
         {/* TODO: Add the following pages for these buttons */}
         
-          {/* <Button variant="ghost" color={useColorModeValue('black', 'white')}>Need Help?</Button>
+          {/* <Button  variant="ghost" color={useColorModeValue('black', 'white')}>Need Help?</Button>
           <Button variant="ghost" color={useColorModeValue('black', 'white')}>About</Button> */}
           <Menu>
             <MenuButton as={Button} variant="ghost" color={useColorModeValue('black', 'white')}>

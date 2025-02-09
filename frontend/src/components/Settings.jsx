@@ -24,7 +24,7 @@ import {
             {/* Theme Setting */}
             <Flex justify="space-between" align="center">
               <Box>
-                <Text fontWeight="medium">Dark Mode (In Development)</Text>
+                <Text fontWeight="medium">Dark Mode</Text>
                 <Text fontSize="sm" color={useColorModeValue('gray.500', 'whiteAlpha.800')}>Toggle dark/light theme</Text>
               </Box>
               <Button onClick={toggleColorMode}/>
